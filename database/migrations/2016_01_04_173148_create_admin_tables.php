@@ -60,6 +60,7 @@ class CreateAdminTables extends Migration
         });
 
         Schema::create(config('admin.database.role_users_table'), function (Blueprint $table) {
+            $table->increments('relation_id');
             $table->integer('role_id');
             $table->integer('user_id');
             $table->index(['role_id', 'user_id']);
@@ -67,6 +68,7 @@ class CreateAdminTables extends Migration
         });
 
         Schema::create(config('admin.database.role_permissions_table'), function (Blueprint $table) {
+            $table->increments('relation_id');
             $table->integer('role_id');
             $table->integer('permission_id');
             $table->index(['role_id', 'permission_id']);
@@ -74,6 +76,7 @@ class CreateAdminTables extends Migration
         });
 
         Schema::create(config('admin.database.user_permissions_table'), function (Blueprint $table) {
+            $table->increments('relation_id');
             $table->integer('user_id');
             $table->integer('permission_id');
             $table->index(['user_id', 'permission_id']);
