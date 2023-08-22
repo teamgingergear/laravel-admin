@@ -8,6 +8,8 @@ class PasswordResetToken extends Model
 {
     protected $fillable = ['email', 'token', 'created_at'];
 
+    public $timestamps = false;
+
     /**
      * Create a new Eloquent model instance.
      *

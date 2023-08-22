@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Lang;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\Facades\Email;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 
@@ -91,6 +91,8 @@ class AuthController extends Controller
 
         if (Administrator::where('username', $email)->exists()) {
             $token = Str::random(8);
+
+            PasswordResetToken::where('email', '=', $email)->delete();
 
             PasswordResetToken::create([
                 'email' => $email,
