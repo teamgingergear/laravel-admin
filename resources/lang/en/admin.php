@@ -6,7 +6,7 @@ return [
     'logout'                => 'Logout',
     'setting'               => 'Setting',
     'name'                  => 'Name',
-    'username'              => 'Username',
+    'username'              => 'Email',
     'password'              => 'Password',
     'password_confirmation' => 'Password confirmation',
     'remember_me'           => 'Remember me',

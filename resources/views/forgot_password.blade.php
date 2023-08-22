@@ -48,33 +48,13 @@
         <input type="text" class="form-control" placeholder="{{ trans('admin.username') }}" name="username" value="{{ old('username') }}">
         <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
       </div>
-      <div class="form-group has-feedback {!! !$errors->has('password') ?: 'has-error' !!}">
-
-        @if($errors->has('password'))
-          @foreach($errors->get('password') as $message)
-            <label class="control-label" for="inputError"><i class="fa fa-times-circle-o"></i>{{$message}}</label><br>
-          @endforeach
-        @endif
-
-        <input type="password" class="form-control" placeholder="{{ trans('admin.password') }}" name="password">
-        <span class="glyphicon glyphicon-lock form-control-feedback"></span>
-      </div>
       <div class="row">
         <div class="col-xs-8">
-          @if(config('admin.auth.remember'))
-          <div class="checkbox icheck">
-            <label>
-              <input type="checkbox" name="remember" value="1" {{ (!old('username') || old('remember')) ? 'checked' : '' }}>
-              {{ trans('admin.remember_me') }}
-            </label>
-          </div>
-          @endif
         </div>
         <!-- /.col -->
         <div class="col-xs-4">
           <input type="hidden" name="_token" value="{{ csrf_token() }}">
-          <button type="submit" class="btn btn-primary btn-block btn-flat">{{ trans('admin.login') }}</button>
-          <a href="forgot-password">Forgot Password?</a>
+          <button type="submit" class="btn btn-primary btn-block btn-flat">Request Password Reset</button>
         </div>
         <!-- /.col -->
       </div>

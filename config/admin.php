@@ -58,6 +58,8 @@ return [
     */
     'route' => [
 
+        'base_url' => env('APP_URL', 'http://localhost'),
+
         'prefix' => env('ADMIN_ROUTE_PREFIX', 'admin'),
 
         'namespace' => 'App\\Admin\\Controllers',
@@ -138,6 +140,8 @@ return [
         'excepts' => [
             'auth/login',
             'auth/logout',
+            'auth/forgot-password',
+            'auth/reset-password',
         ],
     ],
 

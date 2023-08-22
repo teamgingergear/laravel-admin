@@ -337,6 +337,10 @@ class Admin
             $router->get('auth/logout', $authController.'@getLogout')->name('admin.logout');
             $router->get('auth/setting', $authController.'@getSetting')->name('admin.setting');
             $router->put('auth/setting', $authController.'@putSetting');
+            $router->get('auth/forgot-password', $authController.'@getForgotPassword')->name('admin.forgot-password');
+            $router->post('auth/forgot-password', $authController.'@postForgotPassword');
+            $router->get('auth/reset-password', $authController.'@getResetPassword')->name('admin.reset-password');
+            $router->post('auth/reset-password', $authController.'@postResetPassword');
         });
     }
 

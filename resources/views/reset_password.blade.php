@@ -37,17 +37,7 @@
     <p class="login-box-msg">{{ trans('admin.login') }}</p>
 
     <form action="{{ admin_url('auth/login') }}" method="post">
-      <div class="form-group has-feedback {!! !$errors->has('username') ?: 'has-error' !!}">
-
-        @if($errors->has('username'))
-          @foreach($errors->get('username') as $message)
-            <label class="control-label" for="inputError"><i class="fa fa-times-circle-o"></i>{{$message}}</label><br>
-          @endforeach
-        @endif
-
-        <input type="text" class="form-control" placeholder="{{ trans('admin.username') }}" name="username" value="{{ old('username') }}">
-        <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
-      </div>
+      @if ($validToken)
       <div class="form-group has-feedback {!! !$errors->has('password') ?: 'has-error' !!}">
 
         @if($errors->has('password'))
@@ -59,25 +49,36 @@
         <input type="password" class="form-control" placeholder="{{ trans('admin.password') }}" name="password">
         <span class="glyphicon glyphicon-lock form-control-feedback"></span>
       </div>
+      <div class="form-group has-feedback {!! !$errors->has('password_confirm') ?: 'has-error' !!}">
+
+        @if($errors->has('password_confirm'))
+          @foreach($errors->get('password_confirm') as $message)
+            <label class="control-label" for="inputError"><i class="fa fa-times-circle-o"></i>{{$message}}</label><br>
+          @endforeach
+        @endif
+
+        <input type="password" class="form-control" placeholder="Confirm Password" name="password_confirm">
+        <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+      </div>
       <div class="row">
         <div class="col-xs-8">
-          @if(config('admin.auth.remember'))
-          <div class="checkbox icheck">
-            <label>
-              <input type="checkbox" name="remember" value="1" {{ (!old('username') || old('remember')) ? 'checked' : '' }}>
-              {{ trans('admin.remember_me') }}
-            </label>
-          </div>
-          @endif
         </div>
         <!-- /.col -->
         <div class="col-xs-4">
           <input type="hidden" name="_token" value="{{ csrf_token() }}">
-          <button type="submit" class="btn btn-primary btn-block btn-flat">{{ trans('admin.login') }}</button>
-          <a href="forgot-password">Forgot Password?</a>
+          <input type="hidden" name="token" value="{{ $token }}">
+          <input type="hidden" name="email" value="{{ $email }}">
+          <button type="submit" class="btn btn-primary btn-block btn-flat">Reset Password</button>
         </div>
         <!-- /.col -->
       </div>
+      @else
+        <div class="row">
+          <div class="col-xs-12">
+            <h5>Invalid password reset request.</h5>
+          </div>
+        </div>
+      @endif
     </form>
 
   </div>
