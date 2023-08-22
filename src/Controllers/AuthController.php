@@ -168,6 +168,8 @@ class AuthController extends Controller
 
         admin_toastr('You have reset the password successfully.');
 
+        $request->session()->regenerate();
+
         return back();
     }
 
@@ -351,6 +353,8 @@ class AuthController extends Controller
     protected function sendForgotPasswordResponse(Request $request)
     {
         admin_toastr('System has sent the password reset email to you.');
+
+        $request->session()->regenerate();
 
         return back();
     }
