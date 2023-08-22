@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Email;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 
 class AuthController extends Controller
 {
@@ -89,7 +90,7 @@ class AuthController extends Controller
         $email = $request->only($this->username());
 
         if (Administrator::where('username', $email)->exists()) {
-            $token = str_random(8);
+            $token = Str::random(8);
 
             PasswordResetToken::create([
                 'email' => $email,
