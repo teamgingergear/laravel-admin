@@ -36,7 +36,7 @@
   <div class="login-box-body">
     <p class="login-box-msg">{{ trans('admin.login') }}</p>
 
-    <form action="{{ admin_url('auth/login') }}" method="post">
+    <form action="{{ admin_url('auth/reset-password') }}" method="post">
       @if ($validToken)
       <div class="form-group has-feedback {!! !$errors->has('password') ?: 'has-error' !!}">
 
@@ -61,10 +61,10 @@
         <span class="glyphicon glyphicon-lock form-control-feedback"></span>
       </div>
       <div class="row">
-        <div class="col-xs-8">
+        <div class="col-xs-4">
         </div>
         <!-- /.col -->
-        <div class="col-xs-4">
+        <div class="col-xs-8">
           <input type="hidden" name="_token" value="{{ csrf_token() }}">
           <input type="hidden" name="token" value="{{ $token }}">
           <input type="hidden" name="email" value="{{ $email }}">

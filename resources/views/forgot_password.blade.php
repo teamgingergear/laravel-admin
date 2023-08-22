@@ -36,7 +36,7 @@
   <div class="login-box-body">
     <p class="login-box-msg">{{ trans('admin.login') }}</p>
 
-    <form action="{{ admin_url('auth/login') }}" method="post">
+    <form action="{{ admin_url('auth/forgot-password') }}" method="post">
       <div class="form-group has-feedback {!! !$errors->has('username') ?: 'has-error' !!}">
 
         @if($errors->has('username'))
@@ -49,10 +49,10 @@
         <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
       </div>
       <div class="row">
-        <div class="col-xs-8">
+        <div class="col-xs-4">
         </div>
         <!-- /.col -->
-        <div class="col-xs-4">
+        <div class="col-xs-8">
           <input type="hidden" name="_token" value="{{ csrf_token() }}">
           <button type="submit" class="btn btn-primary btn-block btn-flat">Request Password Reset</button>
         </div>
