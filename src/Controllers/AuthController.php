@@ -95,7 +95,7 @@ class AuthController extends Controller
             PasswordResetToken::create([
                 'email' => $email,
                 'token' => $token,
-                'created_at' => DB::raw('now()'),
+                'created_at' => date('Y-m-d H:i:s'),
             ]);
 
             Mail::to($email)->send(new ForgotPassword($email, $token));
