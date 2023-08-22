@@ -34,7 +34,17 @@
   </div>
   <!-- /.login-logo -->
   <div class="login-box-body">
-    @include('admin::partials.toastr')
+    @if(Session::has('toastr'))
+      @php
+        $toastr     = Session::pull('toastr');
+        $type       = \Illuminate\Support\Arr::get($toastr->get('type'), 0, 'success');
+        $message    = \Illuminate\Support\Arr::get($toastr->get('message'), 0, '');
+        $options    = json_encode($toastr->get('options', []));
+      @endphp
+      <div class="alert alert-success" role="alert">
+        {{ $message }}
+      </div>
+    @endif
 
     <form action="{{ admin_url('auth/forgot-password') }}" method="post">
       <div class="form-group has-feedback {!! !$errors->has('username') ?: 'has-error' !!}">
