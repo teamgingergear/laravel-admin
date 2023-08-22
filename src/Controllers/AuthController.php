@@ -87,7 +87,7 @@ class AuthController extends Controller
     {
         $this->forgotPasswordValidator($request->all())->validate();
 
-        $email = $request->only($this->username());
+        $email = $request->input($this->username());
 
         if (Administrator::where('username', $email)->exists()) {
             $token = Str::random(8);
@@ -95,7 +95,7 @@ class AuthController extends Controller
             PasswordResetToken::create([
                 'email' => $email,
                 'token' => $token,
-                'created_at' => date('Y-m-d H:i:s'),
+                'created_at' => DB::raw('now()'),
             ]);
 
             Mail::to($email)->send(new ForgotPassword($email, $token));
@@ -121,8 +121,8 @@ class AuthController extends Controller
             return redirect($this->redirectPath());
         }
 
-        $email = $request->only('email');
-        $token = $request->only('token');
+        $email = $request->input('email');
+        $token = $request->input('token');
 
         $validToken = PasswordResetToken::where('email', '=' , $email)
             ->where('token', '=', $token)
@@ -143,9 +143,9 @@ class AuthController extends Controller
     {
         $this->resetPasswordValidator($request->all())->validate();
 
-        $email = $request->only('email');
-        $token = $request->only('token');
-        $password = $request->only('password');
+        $email = $request->input('email');
+        $token = $request->input('token');
+        $password = $request->input('password');
 
         $validToken = PasswordResetToken::where('email', '=' , $email)
             ->where('token', '=', $token)
