@@ -5,7 +5,7 @@ namespace Encore\Admin\Emails;
 use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Content;
 
-class ForgotPassword implements Mailable
+class ForgotPassword extends Mailable
 {
     public $email;
     public $token;

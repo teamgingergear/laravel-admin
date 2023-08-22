@@ -34,7 +34,7 @@
   </div>
   <!-- /.login-logo -->
   <div class="login-box-body">
-    <p class="login-box-msg">{{ trans('admin.login') }}</p>
+    @include('admin::partials.toastr')
 
     <form action="{{ admin_url('auth/reset-password') }}" method="post">
       @if ($validToken)

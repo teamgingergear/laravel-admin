@@ -34,7 +34,7 @@
   </div>
   <!-- /.login-logo -->
   <div class="login-box-body">
-    <p class="login-box-msg">{{ trans('admin.login') }}</p>
+    @include('admin::partials.toastr')
 
     <form action="{{ admin_url('auth/forgot-password') }}" method="post">
       <div class="form-group has-feedback {!! !$errors->has('username') ?: 'has-error' !!}">
