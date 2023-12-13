@@ -8,4 +8,8 @@
             {!!  $relation->render() !!}
         @endforeach
     </div>
+
+    <div class="col-md-12">
+        {!! $extraHtml !!}
+    </div>
 </div>

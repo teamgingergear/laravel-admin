@@ -66,6 +66,11 @@ class Show implements Renderable
     protected $panel;
 
     /**
+     * @var String
+     */
+    protected $extraHtml = '';
+
+    /**
      * Extended fields.
      *
      * @var array
@@ -157,6 +162,18 @@ class Show implements Renderable
     public function field($name, $label = '')
     {
         return $this->addField($name, $label);
+    }
+
+    /**
+     * Add extra HTML to show.
+     *
+     * @param string $html
+     *
+     * @return Field
+     */
+    public function extraHtml($html)
+    {
+        $this->extraHtml = $html;
     }
 
     /**
@@ -528,6 +545,7 @@ class Show implements Renderable
         $data = [
             'panel'     => $this->panel->fill($this->fields),
             'relations' => $this->relations,
+            'extraHtml' => $this->extraHtml,
         ];
 
         return view('admin::show', $data)->render();
