@@ -346,7 +346,7 @@ class AuthController extends Controller
             'path'    => 'login',
             'method'  => $request->method(),
             'ip'      => $request->getClientIp(),
-            'input'   => '{}',
+            'input'   => '[]',
         ];
 
         try {

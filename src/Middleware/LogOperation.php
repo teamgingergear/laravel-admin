@@ -20,9 +20,21 @@ class LogOperation
     public function handle(Request $request, \Closure $next)
     {
         if ($this->shouldLogOperation($request)) {
+            $path = substr($request->path(), 0, 255);
+
+            $routeMap = config('admin.auth.route_name_map', []);
+
+            if (isset($routeMap[$request->method()])) {
+                foreach ($routeMap[$request->method()] as $routePath => $routeName) {
+                    if (strpos($request->path(), $routePath) !== false) {
+                        $path = $routeName;
+                    }
+                }
+            }
+
             $log = [
                 'user_id' => Admin::user()->id,
-                'path'    => substr($request->path(), 0, 255),
+                'path'    => $path,
                 'method'  => $request->method(),
                 'ip'      => $request->getClientIp(),
                 'input'   => json_encode($request->input()),
