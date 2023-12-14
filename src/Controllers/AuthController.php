@@ -3,6 +3,7 @@
 namespace Encore\Admin\Controllers;
 
 use Encore\Admin\Auth\Database\Administrator;
+use Encore\Admin\Auth\Database\OperationLog as OperationLogModel;
 use Encore\Admin\Auth\Database\PasswordResetToken;
 use Encore\Admin\Facades\Admin;
 use Encore\Admin\Form;
@@ -339,6 +340,20 @@ class AuthController extends Controller
         admin_toastr(trans('admin.login_successful'));
 
         $request->session()->regenerate();
+
+        $log = [
+            'user_id' => Admin::user()->id,
+            'path'    => 'login',
+            'method'  => $request->method(),
+            'ip'      => $request->getClientIp(),
+            'input'   => '{}',
+        ];
+
+        try {
+            OperationLogModel::create($log);
+        } catch (\Exception $exception) {
+            // pass
+        }
 
         return redirect()->intended($this->redirectPath());
     }
