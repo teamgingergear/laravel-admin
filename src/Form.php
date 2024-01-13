@@ -111,6 +111,13 @@ class Form implements Renderable
     public $rows = [];
 
     /**
+     * Input data before ignore.
+     *
+     * @var array
+     */
+    public $publicInputs = [];
+
+    /**
      * @var bool
      */
     protected $isSoftDeletes = false;
@@ -442,6 +449,8 @@ class Form implements Renderable
         if (($response = $this->callSubmitted()) instanceof Response) {
             return $response;
         }
+
+        $this->publicInputs = $this->inputs;
 
         $this->inputs = array_merge($this->removeIgnoredFields($data), $this->inputs);
 
