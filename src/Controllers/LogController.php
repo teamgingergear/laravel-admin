@@ -46,6 +46,12 @@ class LogController extends AdminController
 
         $grid->column('created_at', trans('admin.created_at'));
 
+        $grid->tools(function (Grid\Tools $tools) {
+            $tools->batch(function (Grid\Tools\BatchActions $actions) {
+                $actions->disableDelete();
+            });
+        });
+
         $grid->actions(function (Grid\Displayers\Actions $actions) {
             $actions->disableEdit();
             $actions->disableView();
