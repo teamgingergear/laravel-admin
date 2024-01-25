@@ -27,7 +27,17 @@ class LogOperation
             if (isset($routeMap[$request->method()])) {
                 foreach ($routeMap[$request->method()] as $routePath => $routeName) {
                     if (strpos($request->path(), $routePath) !== false) {
-                        $path = $routeName;
+                        if (is_array($routeName)) {
+                            foreach($routeName as $inputValue => $subName) {
+                                foreach ($request->input() as $key => $value) {
+                                    if (strpos($value, $inputValue) !== false) {
+                                        $path = $subName;
+                                    }
+                                }
+                            }
+                        } else {
+                            $path = $routeName;
+                        }
                     }
                 }
             }
