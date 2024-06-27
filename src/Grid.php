@@ -343,14 +343,6 @@ class Grid
 
         $model = $this->model()->eloquent();
 
-        if (!method_exists($model, $relation) || !$model->{$relation}() instanceof Relations\Relation) {
-            $class = get_class($model);
-
-            admin_error("Call to undefined relationship [{$relation}] on model [{$class}].");
-
-            return $this;
-        }
-
         $name = ($this->shouldSnakeAttributes() ? Str::snake($relation) : $relation).'.'.$column;
 
         $this->model()->with($relation);

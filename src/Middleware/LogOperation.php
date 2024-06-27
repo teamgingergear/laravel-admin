@@ -42,12 +42,22 @@ class LogOperation
                 }
             }
 
+            $input = $request->input();
+
+            if (!empty($input['password'])) {
+                $input['password'] = '********';
+            }
+
+            if (!empty($input['password_confirmation'])) {
+                $input['password_confirmation'] = '********';
+            }
+
             $log = [
                 'user_id' => Admin::user()->id,
                 'path'    => $path,
                 'method'  => $request->method(),
                 'ip'      => $request->getClientIp(),
-                'input'   => json_encode($request->input()),
+                'input'   => json_encode($input),
             ];
 
             try {
